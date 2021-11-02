@@ -301,7 +301,7 @@ volumes:
     #
     customVolume:
      persistentVolumeClaim:
-       claimName: "bitbucket-shared-home"
+       claimName: "atlassian-shared-home"
     
     # -- Specifies the path in the Bitbucket container to which the shared-home volume will be
     # mounted.
