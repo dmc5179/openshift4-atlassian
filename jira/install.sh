@@ -25,4 +25,4 @@ oc create -f ./rolebindings.yaml
 oc create -f ./volumes.yaml
 sleep 2
 
-helm install bitbucket atlassian-data-center/jira --namespace jira --values values.yaml
+helm install jira atlassian-data-center/jira --namespace jira --values values.yaml
