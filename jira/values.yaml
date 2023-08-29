@@ -175,7 +175,7 @@ volumes:
       # -- If 'true', then a 'PersistentVolume' and 'PersistentVolumeClaim' will be dynamically
       # created for each pod based on the 'StorageClassName' supplied below.
       #
-      create: false
+      create: true
 
       # -- Specify the name of the 'StorageClass' that should be used for the local-home
       # volume claim.
@@ -187,7 +187,7 @@ volumes:
       #
       resources:
         requests:
-          storage: 1Gi
+          storage: 10Gi
 
     # -- Static provisioning of local-home using K8s PVs and PVCs
     #
@@ -202,8 +202,8 @@ volumes:
     # https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static
     #
     customVolume: {}
-     persistentVolumeClaim:
-       claimName: "jira-local-home"
+    # persistentVolumeClaim:
+    #   claimName: "jira-local-home"
 
     # -- Specifies the path in the Jira container to which the local-home volume will be
     # mounted.
