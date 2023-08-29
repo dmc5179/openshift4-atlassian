@@ -202,8 +202,8 @@ volumes:
     # https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static
     #
     customVolume: {}
-    # persistentVolumeClaim:
-    #   claimName: "<pvc>"
+     persistentVolumeClaim:
+       claimName: "jira-local-home"
 
     # -- Specifies the path in the Jira container to which the local-home volume will be
     # mounted.
@@ -250,7 +250,7 @@ volumes:
     #
     customVolume:
      persistentVolumeClaim:
-       claimName: "jira-local-home"
+       claimName: "atlassian-shared-home"
 
     # -- Specifies the path in the Jira container to which the shared-home volume will be
     # mounted.
