@@ -91,7 +91,7 @@ serviceAccount:
     # the "serviceAccount.clusterRole.create" flag is set to 'true',
     # then the ClusterRole name will be auto-generated.
     #
-    name:
+    name: "bitbucket"
     
   # Grant permissions defined in ClusterRole
   # https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding
@@ -107,7 +107,7 @@ serviceAccount:
     # the "serviceAccount.clusterRoleBinding.create" flag is set to 'true',
     # then the ClusterRoleBinding name will be auto-generated.
     #
-    name:
+    name: "bitbucket"
     
 # REQUIRED - Database configuration
 #
@@ -125,7 +125,7 @@ database:
    # - 'jdbc:oracle:thin:@<dbhost>:1521:<SID>'
   # https://atlassian.github.io/data-center-helm-charts/userguide/CONFIGURATION/#databaseurl
   #
-  url: 'jdbc:postgresql://postgres:5432/jiradatabase'
+  url: 'jdbc:postgresql://postgres:5432/bitbucket'
   
   # -- The Java class name of the JDBC driver to be used. If not specified, then it will
   # need to be provided via the browser during manual configuration post deployment.
@@ -188,7 +188,7 @@ volumes:
       # -- If 'true', then a 'PersistentVolume' and 'PersistentVolumeClaim' will be dynamically
       # created for each pod based on the 'StorageClassName' supplied below.
       #
-      create: false
+      create: true
       
       # -- Specify the name of the 'StorageClass' that should be used for the local-home
       # volume claim.
@@ -200,7 +200,7 @@ volumes:
       #
       resources:
         requests:
-          storage: 1Gi
+          storage: 10Gi
           
     # -- Static provisioning of local-home using K8s PVs and PVCs
     #
@@ -214,9 +214,9 @@ volumes:
     # the bound 'persistentVolumeClaim.claimName' for the 'customVolume' object.
     # https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static
     #
-    customVolume:
-     persistentVolumeClaim:
-       claimName: "bitbucket-local-home"
+    customVolume: {}
+    # persistentVolumeClaim:
+    #   claimName: "bitbucket-local-home"
     
     # -- Specifies the path in the Bitbucket container to which the local-home volume will be
     # mounted.
@@ -273,7 +273,7 @@ volumes:
       # If set to non-empty string value, this will specify the storage class to be used.
       # If left without value, the default Storage Class will be utilised. Alternatively,
       # can be set to the empty string "", to indicate that no Storage Class should be used here.
-      storageClassName:
+      storageClassName: "efs-sc"
 
       # -- If persistentVolume.create and persistentVolumeClaim.create are both true then any
       # value supplied here is ignored and the default used. A custom value here is useful
@@ -286,7 +286,7 @@ volumes:
       #
       resources:
         requests:
-          storage: 1Gi
+          storage: 100Gi
           
     # -- Static provisioning of shared-home using K8s PVs and PVCs
     #
