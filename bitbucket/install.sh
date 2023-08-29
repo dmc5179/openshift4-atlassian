@@ -3,16 +3,14 @@
 # Switch to the bitbucket project
 oc project jira
 
-# Create the postgres database
-oc create -f ./postgres.yaml
-
-echo "Waiting for postgres to deploy"
-sleep 15
-
 POSTGRES_POD=$(oc get pods | grep postgres | awk '{print $1}')
-oc rsh "${POSTGRES_POD}" psql -h localhost -p 5432 -U admin -p jiraadminpassword -c 'create database bibucket;'
+
+oc rsh ${POSTGRES_POD} psql -h localhost -p 5432 -U postgres -c 'create database bitbucket;'
+
+oc rsh ${POSTGRES_POD} psql -h localhost -p 5432 -U postgres -c 'grant all privileges on database bitbucket to jirauser;'
 
 # Bitbucket needs a secret for accessing the postgresql database
+# TODO: Should this user be the same as the one above? postgres
 oc create secret generic postgres --from-literal=username=jirauser --from-literal=password=jirapassword
 sleep 2
 
