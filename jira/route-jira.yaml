@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app.kubernetes.io/instance: jira
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: jira
+    app.kubernetes.io/version: 9.4.9
+    helm.sh/chart: jira-1.15.2
+  name: jira
+  namespace: atlassian
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: jira
+    weight: 100
+  wildcardPolicy: None

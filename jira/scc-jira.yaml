@@ -1,0 +1,39 @@
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  name: scc-jira
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegeEscalation: false
+allowPrivilegedContainer: false
+#allowedCapabilities:
+#- '*'
+#allowedUnsafeSysctls:
+#- '*'
+defaultAddCapabilities: null
+fsGroup:
+  type: MustRunAs
+  ranges:
+  - max: 2001
+    min: 2001
+runAsUser:
+  type: MustRunAs
+  uid: 2001
+readOnlyRootFilesystem: false
+requiredDropCapabilities: null
+seLinuxContext:
+  type: RunAsAny
+#seccompProfiles:
+#- '*'
+seccompProfiles:
+- "runtime/default"
+supplementalGroups:
+  type: RunAsAny
+#supplementalGroups:
+#  type: MustRunAs
+#  gid: 2001
+volumes:
+- '*'
