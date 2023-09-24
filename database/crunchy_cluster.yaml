@@ -1,0 +1,40 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+#  annotations:
+#    kubectl.kubernetes.io/last-applied-configuration: |
+#      {"apiVersion":"postgres-operator.crunchydata.com/v1beta1","kind":"PostgresCluster","metadata":{"annotations":{},"name":"hippo","namespace":"atlassian"},"spec":{"backups":{"pgbackrest":{"image":"registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.47-0","repos":[{"name":"repo1","volume":{"volumeClaimSpec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}}}}}]}},"image":"registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-15.4-0","instances":[{"dataVolumeClaimSpec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}}},"name":"instance1"}],"postgresVersion":15}}
+  finalizers:
+  - postgres-operator.crunchydata.com/finalizer
+  generation: 1
+  name: hippo
+  namespace: atlassian
+spec:
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.47-0
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 5Gi
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-15.4-0
+  instances:
+  - dataVolumeClaimSpec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+    name: instance1
+    replicas: 1
+  port: 5432
+  postgresVersion: 12
+  users:
+    - name: jirauser
+      databases:
+        - jiradatabase
