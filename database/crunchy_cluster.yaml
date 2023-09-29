@@ -22,7 +22,7 @@ spec:
             resources:
               requests:
                 storage: 5Gi
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-15.4-0
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.8-3
   instances:
   - dataVolumeClaimSpec:
       accessModes:
@@ -31,9 +31,9 @@ spec:
         requests:
           storage: 5Gi
     name: instance1
-    replicas: 1
+    replicas: 2
   port: 5432
-  postgresVersion: 12
+  postgresVersion: 14
   users:
     - name: jirauser
       databases:
