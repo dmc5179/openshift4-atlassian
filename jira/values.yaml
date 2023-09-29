@@ -35,7 +35,7 @@ image:
   # -- The Jira Docker image to use
   # https://hub.docker.com/r/atlassian/jira-software
   #
-  repository: atlassian/jira-software
+  repository: docker.io/atlassian/jira-software
 
   # -- Image pull policy
   #
@@ -43,7 +43,7 @@ image:
 
   # -- The docker image tag to be used - defaults to the Chart appVersion
   #
-  tag: ""
+  tag: "9.10.1"
 
 # K8s ServiceAccount configuration. Give fine-grained identity and authorization
 # to Pods
@@ -112,7 +112,8 @@ database:
    # - 'jdbc:oracle:thin:@<dbhost>:1521:<SID>'
   # https://atlassian.github.io/data-center-helm-charts/userguide/CONFIGURATION/#databaseurl
   #
-  url: 'jdbc:postgresql://postgres:5432/jiradatabase'
+  #url: 'jdbc:postgresql://postgres.atlassian.svc:5432/jiradatabase'
+  url: 'postgresql://jirauser:7FrxNw+ZFodYSS%28XnF%5D%7BTPtp@hippo-primary.atlassian.svc:5432/jiradatabase'
 
   # -- The Java class name of the JDBC driver to be used. If not specified, then it will
   # need to be provided via the browser during manual configuration post deployment.
@@ -127,7 +128,7 @@ database:
 
   # JDBC connection credentials
   #
-  credentials:
+  #credentials:
 
     # -- The name of the K8s Secret that contains the database login credentials.
     # If the secret is specified, then the credentials will be automatically utilised on
@@ -139,15 +140,15 @@ database:
     # --from-literal=password=<password>'
     # https://kubernetes.io/docs/concepts/configuration/secret/#opaque-secrets
     #
-    secretName: 'postgres'
+    #secretName: 'postgres'
 
     # -- The key ('username') in the Secret used to store the database login username
     #
-    usernameSecretKey: username
+    #usernameSecretKey: username
 
     # -- The key ('password') in the Secret used to store the database login password
     #
-    passwordSecretKey: password
+    #passwordSecretKey: password
 
 # REQUIRED - Volume configuration
 #
@@ -595,7 +596,7 @@ jira:
     # -- Set to 'true' if Data Center clustering should be enabled
     # This will automatically configure cluster peer discovery between cluster nodes.
     #
-    enabled: false
+    enabled: true
 
   shutdown:
 
